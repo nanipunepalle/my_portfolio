@@ -1,4 +1,4 @@
-const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+const basePath = '/my_portfolio';
 
 module.exports = {
   basePath,
