@@ -10,7 +10,21 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Avatar, Chip, Grid, Paper } from '@material-ui/core';
-import Box from '@material-ui/core/Box'
+import Box from '@material-ui/core/Box';
+
+const projects = [{
+  id: 1,
+  name: "Ellipse Web Application",
+  desc: "Application to host and organize college events and hackathons",
+  url: "https://ellipseapp.com",
+  languages: ["React.js", "Node.js", "MongoDB"]
+}, {
+  id: 2,
+  name: "SnippetBook Web Application",
+  desc: "Application to store and share code snippets",
+  url: "https://ellipseapp.com",
+  languages: ["React.js", "flask", "MongoDB"]
+}]
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -33,21 +47,31 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   avatar: {
-    height: "150px",
-    width: "150px",
+    height: "250px",
+    width: "250px",
     alignItems: "center",
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   projectsDiv: {
-    margin: theme.spacing(10)
+    margin: theme.spacing(2),
+    [theme.breakpoints.up('md')]: {
+      margin: theme.spacing(10),
+    },
+
   },
   projectsPaper: {
     backgroundColor: theme.palette.secondary.main,
     padding: theme.spacing(4),
     borderRadius: theme.spacing(4),
-    boxShadow: "0px 1px 2px 0px white",
+    boxShadow: "0px 1px 2px 1px white",
     '&:hover': {
       background: "rgb(256, 256, 256,0.3)",
+    },
+    height: "100%"
+  },
+  leftBox: {
+    [theme.breakpoints.up('md')]: {
+      position: "fixed", width: "50%", marginTop: "100px"
     },
   }
 
@@ -59,19 +83,15 @@ export default function PrimarySearchAppBar() {
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
-
-  
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  
+
 
   const mobileMenuId = 'menu-mobile';
   const renderMobileMenu = (
@@ -126,24 +146,31 @@ export default function PrimarySearchAppBar() {
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="home" color="inherit">
-              <Typography>Home</Typography>
-            </IconButton>
-            <IconButton aria-label="skills" color="inherit">
-              <Typography>Skills</Typography>
-            </IconButton>
-            <IconButton aria-label="projects" color="inherit">
-              <Typography>Projects</Typography>
-            </IconButton>
-            <IconButton aria-label="projects" color="inherit">
-              <Typography>Education</Typography>
-            </IconButton>
-            <IconButton aria-label="gallery" color="inherit">
-              <Typography>Gallery</Typography>
-            </IconButton>
-            <IconButton aria-label="contact" color="inherit">
-              <Typography>Contact</Typography>
-            </IconButton>
+            <a href="/">
+              <IconButton aria-label="home" color="inherit">
+                <Typography>Home</Typography>
+              </IconButton></a>
+            <a href="#techdiv">
+              <IconButton aria-label="skills" color="inherit">
+                <Typography>Skills</Typography>
+              </IconButton></a>
+            <a href="#projectsdiv">
+              <IconButton aria-label="projects" color="inherit">
+                <Typography>Projects</Typography>
+              </IconButton></a>
+            <a href="#projectsdiv">
+              <IconButton aria-label="projects" color="inherit">
+                <Typography>Education</Typography>
+              </IconButton>
+            </a>
+            <a href="#projectsdiv">
+              <IconButton aria-label="gallery" color="inherit">
+                <Typography>Gallery</Typography>
+              </IconButton></a>
+            <a href="#projectsdiv">
+              <IconButton aria-label="contact" color="inherit">
+                <Typography>Contact</Typography>
+              </IconButton></a>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -160,53 +187,73 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       <div>
-        <Box >
-          <Box display="flex" justifyContent="center">
-            <Avatar className={classes.avatar} src="https://nanipunepalle.github.io/my_portfolio/me.jpg"></Avatar>
+        <Grid container component="main">
+          <Grid item xs={12} md={5} >
+            <Box className={classes.leftBox}>
+              <Box display="flex" flexDirection="column" justifyContent="center">
+                <Box display="flex" justifyContent="center">
+                  <Avatar className={classes.avatar} src="https://nanipunepalle.github.io/my_portfolio/me.jpg"></Avatar>
+                </Box>
+                <Box display="flex" justifyContent="center">
+                  <Typography variant="h5" >Hi there, </Typography>
+                </Box>
+                <Box display="flex" justifyContent="center">
+                  <Typography variant="h3" >I am Lalith</Typography>
+                </Box>
+                <Box display="flex" justifyContent="center">
+                  <Typography variant="h5">A bit about me</Typography>
+                </Box>
+                <Box display="flex" justifyContent="center" margin={2}>
+                  <a href="https://github.com/nanipunepalle"><Avatar src="/my_portfolio/github_logo.png" ></Avatar></a>
+                  <a href="https://linkedin.com/in/lalith-reddy-605480167"><Avatar src="/my_portfolio/linkedin_logo2.png" variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
+                  <a href="https://twitter.com/iamlalithreddy"><Avatar src="/my_portfolio/twitter_logo.png" variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
+                </Box>
+              </Box>
+            </Box>
 
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <Typography variant="h3">Hi there, I am Lalith</Typography>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <Typography variant="h5">A bit about me</Typography>
-          </Box>
-        </Box>
-      </div>
-      <div className={classes.projectsDiv}>
-        <Typography style={{ margin: "5px" }}>Technical Skills</Typography>
-        <Grid component="main" container spacing={2}>
-          <Grid item xs={12} md={4}>
-            <Chip label="Java Script" style={{ marginRight: "2px" }}></Chip>
-            <Chip label="Python" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-            <Chip label="Java" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-            <Chip label="Swift" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-            <Chip label="React.js" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-            <Chip label="Node.js" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-            <Chip label="MongoDB" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-            <Chip label="SwiftUI" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-            <Chip label="Flask" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-            <Chip label="Web Development" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-            <Chip label="iOS App Development" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
           </Grid>
-
-        </Grid>
-      </div>
-      <div className={classes.projectsDiv}>
-        <Typography style={{ margin: "5px" }}>Projects</Typography>
-        <Grid component="main" container spacing={2}>
-          <Grid item xs={12} md={4}>
-            <a href="https://ellipseapp.com" target="_blank">
-              <Paper elevation={10} className={classes.projectsPaper}>
-                <Typography variant="h5" >Ellipse Web Application</Typography>
-                <Typography variant="body1" color="textSecondary" style={{ margin: "5px 0px" }}>Application to host and organize college events and hackathons</Typography>
-                <Chip label="React.js" style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-                <Chip label="Node.js"></Chip>
-              </Paper>
-            </a>
+          <Grid item xs={12} md={7} id="techdiv">
+            <div className={classes.projectsDiv} >
+              <Typography style={{ margin: "5px" }}>Technical Skills</Typography>
+              <Grid component="main" container spacing={2}>
+                <Grid item xs={12} md={12}>
+                  <Chip label="Java Script" style={{ marginRight: "8px" }}></Chip>
+                  <Chip label="Python" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  <Chip label="Java" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  <Chip label="Swift" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  <Chip label="React.js" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  <Chip label="Node.js" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  <Chip label="MongoDB" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  <Chip label="SwiftUI" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  <Chip label="Flask" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  <Chip label="Web Development" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  <Chip label="iOS App Development" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                </Grid>
+              </Grid>
+            </div>
+            <div className={classes.projectsDiv} id="projectsdiv">
+              <Typography style={{ margin: "5px" }}>Projects</Typography>
+              <Grid component="main" container spacing={2}>
+                {
+                  projects.map((val, index) => {
+                    return <Grid item xs={12} md={6}>
+                      <a href={val.url} target="_blank">
+                        <Paper elevation={10} className={classes.projectsPaper}>
+                          <Typography variant="h5" >{val.name}</Typography>
+                          <Typography variant="body1" color="textSecondary" style={{ margin: "5px 0px" }}>{val.desc}</Typography>
+                          {
+                            val.languages.map((lang, value) => {
+                              return <Chip label={lang} style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
+                            })
+                          }
+                        </Paper>
+                      </a>
+                    </Grid>
+                  })
+                }
+              </Grid>
+            </div>
           </Grid>
-
-
         </Grid>
       </div>
     </div>
