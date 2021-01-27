@@ -162,7 +162,7 @@ export default function PrimarySearchAppBar() {
       <div>
         <Box >
           <Box display="flex" justifyContent="center">
-            <Avatar className={classes.avatar} src="/me.jpg"></Avatar>
+            <Avatar className={classes.avatar} src="https://nanipunepalle.github.io/my_portfolio/me.jpg"></Avatar>
 
           </Box>
           <Box display="flex" justifyContent="center">
