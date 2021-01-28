@@ -11,6 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Avatar, Chip, Grid, Paper } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import Slide from '@material-ui/core/Slide';
 
 const projects = [{
   id: 1,
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
+
   },
   sectionMobile: {
     display: 'flex',
@@ -50,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
     height: "250px",
     width: "250px",
     alignItems: "center",
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(1)
+
   },
   projectsDiv: {
     margin: theme.spacing(2),
@@ -79,6 +82,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     backgroundColor: theme.palette.secondary.main,
     margin: theme.spacing(1)
+  },
+  iconAvatar: {
+    height: "25px",
+    width: "25px"
   }
 
 }));
@@ -110,7 +117,7 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <a href="/">
+      <a href={process.env.NODE_ENV === 'production' ? '/my_portfolio' : "/"}>
         <MenuItem>
           <IconButton aria-label="home" color="inherit">
             <Typography>Home</Typography>
@@ -138,14 +145,14 @@ export default function PrimarySearchAppBar() {
           </IconButton>
         </MenuItem>
       </a>
-      <a href="/">
+      <a href={process.env.NODE_ENV === 'production' ? '/my_portfolio/gallery' : "/gallery"}>
         <MenuItem>
           <IconButton aria-label="gallery" color="inherit">
             <Typography>Gallery</Typography>
           </IconButton>
         </MenuItem>
       </a>
-      <a href="/">
+      <a href="#contactdiv">
         <MenuItem>
           <IconButton aria-label="contact" color="inherit">
             <Typography>Contact</Typography>
@@ -169,7 +176,7 @@ export default function PrimarySearchAppBar() {
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <a href="/">
+            <a href={process.env.NODE_ENV === 'production' ? '/my_portfolio' : "/"}>
               <IconButton aria-label="home" color="inherit">
                 <Typography>Home</Typography>
               </IconButton>
@@ -189,12 +196,12 @@ export default function PrimarySearchAppBar() {
                 <Typography>Education</Typography>
               </IconButton>
             </a>
-            <a href="#projectsdiv">
+            <a href={process.env.NODE_ENV === 'production' ? '/my_portfolio/gallery' : "/gallery"}>
               <IconButton aria-label="gallery" color="inherit">
                 <Typography>Gallery</Typography>
               </IconButton>
             </a>
-            <a href="#projectsdiv">
+            <a href="#contactdiv">
               <IconButton aria-label="contact" color="inherit">
                 <Typography>Contact</Typography>
               </IconButton>
@@ -216,85 +223,101 @@ export default function PrimarySearchAppBar() {
       {renderMobileMenu}
       <div>
         <Grid container component="main">
+
           <Grid item xs={12} md={5} >
             <Box className={classes.leftBox}>
-              <Box display="flex" flexDirection="column" justifyContent="center">
-                <Box display="flex" justifyContent="center">
-                  <Avatar className={classes.avatar} src="me.png" variant="square"></Avatar>
+              <Slide direction="right" in={true} timeout={1000} mountOnEnter unmountOnExit>
+                <Box display="flex" flexDirection="column" justifyContent="center">
+                  <Box display="flex" justifyContent="center">
+                    <Avatar className={classes.avatar} src="me.png" variant="square"></Avatar>
+                  </Box>
+                  <Box display="flex" justifyContent="center">
+                    <Typography variant="h5" >Hi there, </Typography>
+                  </Box>
+                  <Box display="flex" justifyContent="center">
+                    <Typography variant="h3" >I am Lalith</Typography>
+                  </Box>
+                  <Box display="flex" justifyContent="center">
+                    <Typography variant="h5">A bit about me</Typography>
+                  </Box>
+                  <Box display="flex" justifyContent="center" margin={2}>
+                    <a href="https://github.com/nanipunepalle"><Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/github_logo.png' : '/github_logo.png'} ></Avatar></a>
+                    <a href="https://linkedin.com/in/lalith-reddy-605480167"><Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/linkedin_logo2.png' : '/linkedin_logo2.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
+                    <a href="https://twitter.com/iamlalithreddy"><Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/twitter_logo.png' : '/twitter_logo.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
+                  </Box>
                 </Box>
-                <Box display="flex" justifyContent="center">
-                  <Typography variant="h5" >Hi there, </Typography>
-                </Box>
-                <Box display="flex" justifyContent="center">
-                  <Typography variant="h3" >I am Lalith</Typography>
-                </Box>
-                <Box display="flex" justifyContent="center">
-                  <Typography variant="h5">A bit about me</Typography>
-                </Box>
-                <Box display="flex" justifyContent="center" margin={2}>
-                  <a href="https://github.com/nanipunepalle"><Avatar src={process.env.NODE_ENV === 'production' ? '/my_portfolio/github_logo.png' : '/github_logo.png'} ></Avatar></a>
-                  <a href="https://linkedin.com/in/lalith-reddy-605480167"><Avatar src={process.env.NODE_ENV === 'production' ? '/my_portfolio/linkedin_logo2.png' : '/linkedin_logo2.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
-                  <a href="https://twitter.com/iamlalithreddy"><Avatar src={process.env.NODE_ENV === 'production' ? '/my_portfolio/twitter_logo.png' : '/twitter_logo.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
-                </Box>
-              </Box>
+              </Slide>
             </Box>
 
           </Grid>
-          <Grid item xs={12} md={7} id="techdiv">
-            <div className={classes.projectsDiv} >
-              <Typography style={{ margin: "5px" }}>Technical Skills</Typography>
-              <Grid component="main" container spacing={2}>
-                <Grid item xs={12} md={12}>
-                  <Chip label="Java Script" style={{ marginRight: "8px" }}></Chip>
-                  <Chip label="Python" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                  <Chip label="Java" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                  <Chip label="Swift" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                  <Chip label="React.js" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                  <Chip label="Node.js" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                  <Chip label="MongoDB" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                  <Chip label="SwiftUI" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                  <Chip label="Flask" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                  <Chip label="Web Development" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                  <Chip label="iOS App Development" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+          <Slide direction="up" in={true} timeout={1000} mountOnEnter unmountOnExit>
+            <Grid item xs={12} md={7} id="techdiv">
+
+              <div className={classes.projectsDiv} >
+                <Typography style={{ margin: "5px" }}>Technical Skills</Typography>
+                <Grid component="main" container spacing={2}>
+                  <Grid item xs={12} md={12}>
+                    <Chip label="Java Script" style={{ marginRight: "8px" }}></Chip>
+                    <Chip label="Python" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    <Chip label="Java" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    <Chip label="Swift" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    <Chip label="React.js" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    <Chip label="Node.js" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    <Chip label="MongoDB" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    <Chip label="SwiftUI" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    <Chip label="Flask" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    <Chip label="Web Development" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    <Chip label="iOS App Development" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </div>
-            <div className={classes.projectsDiv} id="projectsdiv">
-              <Typography style={{ margin: "5px" }}>Projects</Typography>
-              <Grid component="main" container spacing={2}>
-                {
-                  projects.map((val, index) => {
-                    return <Grid item xs={12} md={6}>
-                      <a href={val.url} target="_blank">
-                        <Paper elevation={10} className={classes.projectsPaper}>
-                          <Typography variant="h5" >{val.name}</Typography>
-                          <Typography variant="body1" color="textSecondary" style={{ margin: "5px 0px" }}>{val.desc}</Typography>
-                          {
-                            val.languages.map((lang, value) => {
-                              return <Chip label={lang} style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
-                            })
-                          }
-                        </Paper>
-                      </a>
-                    </Grid>
-                  })
-                }
-              </Grid>
-            </div>
-            <div className={classes.projectsDiv} id="educationdiv">
-              <Typography style={{ margin: "5px" }}>Education</Typography>
-              <Grid component="main" container spacing={2}>
+              </div>
+              <div className={classes.projectsDiv} id="projectsdiv">
+                <Typography style={{ margin: "5px" }}>Projects</Typography>
+                <Grid component="main" container spacing={2}>
+                  {
+                    projects.map((val, index) => {
+                      return <Grid item xs={12} md={6}>
+                        <a href={val.url} target="_blank">
+                          <Paper elevation={10} className={classes.projectsPaper}>
+                            <Typography variant="h5" >{val.name}</Typography>
+                            <Typography variant="body1" color="textSecondary" style={{ margin: "5px 0px" }}>{val.desc}</Typography>
+                            {
+                              val.languages.map((lang, value) => {
+                                return <Chip label={lang} style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
+                              })
+                            }
+                          </Paper>
+                        </a>
+                      </Grid>
+                    })
+                  }
+                </Grid>
+              </div>
+              <div className={classes.projectsDiv} id="educationdiv">
+                <Typography style={{ margin: "5px" }}>Education</Typography>
+                <Grid component="main" container spacing={2}>
+                  <Paper className={classes.educationPaper} elevation={10}>
+                    <Typography>Vellore Institute of Technology, Vellore(2018 - Present)</Typography>
+                    <Typography color="textSecondary">Integrated M Tech(Software Engineering)</Typography>
+                  </Paper>
+                  <Paper className={classes.educationPaper} elevation={10}>
+                    <Typography>Sri Chaitanya Institutions, Chittoor(2016 - 2018)</Typography>
+                    <Typography color="textSecondary">11th, 12th</Typography>
+                  </Paper>
+                </Grid>
+
+              </div>
+              <div className={classes.projectsDiv} id="contactdiv">
+                <Typography style={{ margin: "5px" }}>Contact</Typography>
                 <Paper className={classes.educationPaper} elevation={10}>
-                  <Typography>Vellore Institute of Technology, Vellore(2018 - Present)</Typography>
-                  <Typography color="textSecondary">Integrated M Tech(Software Engineering)</Typography>
+                  <a href="mailto:lalithpunepalli@gmail.com" target="_blank"><Typography style={{ textDecorationLine: "underline" }}>lalithpunepalli@gmail.com</Typography></a>
+                  <Typography>+91 9014040448</Typography>
+                  <Typography>K Block, Men's Hostel, Vellore Institute of Technology, Vellore - 632014</Typography>
                 </Paper>
-                <Paper className={classes.educationPaper} elevation={10}>
-                  <Typography>Sri Chaitanya Institutions, Chittoor(2016 - 2018)</Typography>
-                  <Typography color="textSecondary">11th, 12th</Typography>
-                </Paper>
-              </Grid>
-            </div>
-          </Grid>
+              </div>
+
+            </Grid>
+          </Slide>
         </Grid>
       </div>
     </div>
