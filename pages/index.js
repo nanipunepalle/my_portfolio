@@ -14,7 +14,7 @@ import Box from '@material-ui/core/Box';
 
 const projects = [{
   id: 1,
-  name: "Ellipse Web Application",
+  name: "EllipseApp Web Application",
   desc: "Application to host and organize college events and hackathons",
   url: "https://ellipseapp.com",
   languages: ["React.js", "Node.js", "MongoDB"]
@@ -73,6 +73,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       position: "fixed", width: "50%", marginTop: "100px"
     },
+  },
+  educationPaper: {
+    width: "100%",
+    padding: theme.spacing(2),
+    backgroundColor: theme.palette.secondary.main,
+    margin: theme.spacing(1)
   }
 
 }));
@@ -104,31 +110,48 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="home" color="inherit">
-          <Typography>Home</Typography>
-        </IconButton>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="skills" color="inherit">
-          <Typography>Skills</Typography>
-        </IconButton>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="projects" color="inherit">
-          <Typography>Projects</Typography>
-        </IconButton>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="gallery" color="inherit">
-          <Typography>Gallery</Typography>
-        </IconButton>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="contact" color="inherit">
-          <Typography>Contact</Typography>
-        </IconButton>
-      </MenuItem>
+      <a href="/">
+        <MenuItem>
+          <IconButton aria-label="home" color="inherit">
+            <Typography>Home</Typography>
+          </IconButton>
+        </MenuItem>
+      </a>
+      <a href="#techdiv">
+        <MenuItem>
+          <IconButton aria-label="skills" color="inherit">
+            <Typography>Skills</Typography>
+          </IconButton>
+        </MenuItem>
+      </a>
+      <a href="#projectsdiv">
+        <MenuItem>
+          <IconButton aria-label="projects" color="inherit">
+            <Typography>Projects</Typography>
+          </IconButton>
+        </MenuItem>
+      </a>
+      <a href="#educationdiv">
+        <MenuItem>
+          <IconButton aria-label="education" color="inherit">
+            <Typography>Education</Typography>
+          </IconButton>
+        </MenuItem>
+      </a>
+      <a href="/">
+        <MenuItem>
+          <IconButton aria-label="gallery" color="inherit">
+            <Typography>Gallery</Typography>
+          </IconButton>
+        </MenuItem>
+      </a>
+      <a href="/">
+        <MenuItem>
+          <IconButton aria-label="contact" color="inherit">
+            <Typography>Contact</Typography>
+          </IconButton>
+        </MenuItem>
+      </a>
     </Menu>
   );
 
@@ -149,16 +172,19 @@ export default function PrimarySearchAppBar() {
             <a href="/">
               <IconButton aria-label="home" color="inherit">
                 <Typography>Home</Typography>
-              </IconButton></a>
+              </IconButton>
+            </a>
             <a href="#techdiv">
               <IconButton aria-label="skills" color="inherit">
                 <Typography>Skills</Typography>
-              </IconButton></a>
+              </IconButton>
+            </a>
             <a href="#projectsdiv">
               <IconButton aria-label="projects" color="inherit">
                 <Typography>Projects</Typography>
-              </IconButton></a>
-            <a href="#projectsdiv">
+              </IconButton>
+            </a>
+            <a href="#educationdiv">
               <IconButton aria-label="projects" color="inherit">
                 <Typography>Education</Typography>
               </IconButton>
@@ -166,11 +192,13 @@ export default function PrimarySearchAppBar() {
             <a href="#projectsdiv">
               <IconButton aria-label="gallery" color="inherit">
                 <Typography>Gallery</Typography>
-              </IconButton></a>
+              </IconButton>
+            </a>
             <a href="#projectsdiv">
               <IconButton aria-label="contact" color="inherit">
                 <Typography>Contact</Typography>
-              </IconButton></a>
+              </IconButton>
+            </a>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -192,7 +220,7 @@ export default function PrimarySearchAppBar() {
             <Box className={classes.leftBox}>
               <Box display="flex" flexDirection="column" justifyContent="center">
                 <Box display="flex" justifyContent="center">
-                  <Avatar className={classes.avatar} src="https://nanipunepalle.github.io/my_portfolio/me.jpg"></Avatar>
+                  <Avatar className={classes.avatar} src="me.png" variant="square"></Avatar>
                 </Box>
                 <Box display="flex" justifyContent="center">
                   <Typography variant="h5" >Hi there, </Typography>
@@ -204,9 +232,9 @@ export default function PrimarySearchAppBar() {
                   <Typography variant="h5">A bit about me</Typography>
                 </Box>
                 <Box display="flex" justifyContent="center" margin={2}>
-                  <a href="https://github.com/nanipunepalle"><Avatar src="/my_portfolio/github_logo.png" ></Avatar></a>
-                  <a href="https://linkedin.com/in/lalith-reddy-605480167"><Avatar src="/my_portfolio/linkedin_logo2.png" variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
-                  <a href="https://twitter.com/iamlalithreddy"><Avatar src="/my_portfolio/twitter_logo.png" variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
+                  <a href="https://github.com/nanipunepalle"><Avatar src={process.env.NODE_ENV === 'production' ? '/my_portfolio/github_logo.png' : '/github_logo.png'} ></Avatar></a>
+                  <a href="https://linkedin.com/in/lalith-reddy-605480167"><Avatar src={process.env.NODE_ENV === 'production' ? '/my_portfolio/linkedin_logo2.png' : '/linkedin_logo2.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
+                  <a href="https://twitter.com/iamlalithreddy"><Avatar src={process.env.NODE_ENV === 'production' ? '/my_portfolio/twitter_logo.png' : '/twitter_logo.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
                 </Box>
               </Box>
             </Box>
@@ -251,6 +279,19 @@ export default function PrimarySearchAppBar() {
                     </Grid>
                   })
                 }
+              </Grid>
+            </div>
+            <div className={classes.projectsDiv} id="educationdiv">
+              <Typography style={{ margin: "5px" }}>Education</Typography>
+              <Grid component="main" container spacing={2}>
+                <Paper className={classes.educationPaper} elevation={10}>
+                  <Typography>Vellore Institute of Technology, Vellore(2018 - Present)</Typography>
+                  <Typography color="textSecondary">Integrated M Tech(Software Engineering)</Typography>
+                </Paper>
+                <Paper className={classes.educationPaper} elevation={10}>
+                  <Typography>Sri Chaitanya Institutions, Chittoor(2016 - 2018)</Typography>
+                  <Typography color="textSecondary">11th, 12th</Typography>
+                </Paper>
               </Grid>
             </div>
           </Grid>
