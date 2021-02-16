@@ -1,6 +1,7 @@
 import Head from 'next/head'
-
 import React from 'react';
+
+//materialui icons
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,25 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Avatar, Grid, Paper } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
 
 import LeftProfilePanel from '../Components/LeftProfilePanel';
-
-const projects = [{
-    id: 1,
-    name: "EllipseApp Web Application",
-    desc: "Application to host and organize college events and hackathons",
-    url: "https://ellipseapp.com",
-    languages: ["React.js", "Node.js", "MongoDB"]
-}, {
-    id: 2,
-    name: "SnippetBook Web Application",
-    desc: "Application to store and share code snippets",
-    url: "https://ellipseapp.com",
-    languages: ["React.js", "flask", "MongoDB"]
-}]
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -147,13 +135,12 @@ export default function PrimarySearchAppBar() {
         <div className={classes.grow}>
             <Head>
                 <title>Lalith</title>
-                {/* <link rel="icon" href="/favicon.ico" /> */}
             </Head>
             <AppBar position="sticky">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
                         Lalith
-          </Typography>
+                   </Typography>
 
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>

@@ -13,19 +13,8 @@ import { Avatar, Chip, Grid, Paper } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
 
-const projects = [{
-  id: 1,
-  name: "EllipseApp Web Application",
-  desc: "Application to host and organize college events and hackathons",
-  url: "https://ellipseapp.com",
-  languages: ["React.js", "Node.js", "MongoDB"]
-}, {
-  id: 2,
-  name: "SnippetBook Web Application",
-  desc: "Application to store and share code snippets",
-  url: "https://ellipseapp.com",
-  languages: ["React.js", "flask", "MongoDB"]
-}]
+import {projects,skills} from '../Components/data'
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -257,17 +246,11 @@ export default function PrimarySearchAppBar() {
                 <Typography style={{ margin: "5px" }}>Technical Skills</Typography>
                 <Grid component="main" container spacing={2}>
                   <Grid item xs={12} md={12}>
-                    <Chip label="Java Script" style={{ marginRight: "8px" }}></Chip>
-                    <Chip label="Python" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                    <Chip label="Java" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                    <Chip label="Swift" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                    <Chip label="React.js" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                    <Chip label="Node.js" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                    <Chip label="MongoDB" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                    <Chip label="SwiftUI" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                    <Chip label="Flask" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                    <Chip label="Web Development" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
-                    <Chip label="iOS App Development" style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                    {
+                      skills.map((skill, index) => {
+                        return <Chip label={skill} style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                      })
+                    }
                   </Grid>
                 </Grid>
               </div>
@@ -315,7 +298,6 @@ export default function PrimarySearchAppBar() {
                   <Typography>K Block, Men's Hostel, Vellore Institute of Technology, Vellore - 632014</Typography>
                 </Paper>
               </div>
-
             </Grid>
           </Slide>
         </Grid>
@@ -323,6 +305,3 @@ export default function PrimarySearchAppBar() {
     </div>
   );
 }
-
-
-
