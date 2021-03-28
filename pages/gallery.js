@@ -196,7 +196,7 @@ export default function PrimarySearchAppBar() {
                     </Grid>
                     <Slide direction="up" in={true} timeout={1000} mountOnEnter unmountOnExit>
                         <Grid item xs={12} md={7}>
-                            {["image3.jpg", "image2.jpg", "image1.png", "image4.jpg"].map((value, index) => {
+                            {["image5.jpg","image3.jpg", "image2.jpg", "image1.png", "image4.jpg"].map((value, index) => {
                                 return <Paper style={{ margin: "50px" }} className={classes.imagesPaper}>
                                     <Box display="flex" justifyContent="flex-end" padding={2}>
                                         <a href={process.env.NODE_ENV === 'production' ? `/my_portfolio/${value}` : `/${value}`} download>DOWNLOAD</a>
