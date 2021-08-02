@@ -1,5 +1,5 @@
 My Portfolio
-[a link](https://nanipunepalle.github.io/my_portfolio/)
+[https://nanipunepalle.github.io/my_portfolio/](https://nanipunepalle.github.io/my_portfolio/)
 
 
 
