@@ -12,8 +12,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Avatar, Chip, Grid, Paper } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
+import Button from '@material-ui/core/Button';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 
-import {projects,skills} from '../Components/data'
+import { projects, skills } from '../Components/data'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -75,8 +77,10 @@ const useStyles = makeStyles((theme) => ({
   iconAvatar: {
     height: "25px",
     width: "25px"
+  },
+  downloadButton: {
+    borderRadius: theme.spacing(1)
   }
-
 }));
 
 export default function PrimarySearchAppBar() {
@@ -233,6 +237,11 @@ export default function PrimarySearchAppBar() {
                     <a href="https://github.com/nanipunepalle"><Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/github_logo.png' : '/github_logo.png'} ></Avatar></a>
                     <a href="https://linkedin.com/in/lalith-reddy-605480167"><Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/linkedin_logo2.png' : '/linkedin_logo2.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
                     <a href="https://twitter.com/iamlalithreddy"><Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/twitter_logo.png' : '/twitter_logo.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
+                  </Box>
+                  <Box display="flex" justifyContent="center" margin={2}>
+                    <a href={process.env.NODE_ENV === 'production' ? `/my_portfolio/RESUME.pdf` : '/RESUME.pdf'} download>
+                      <Button className={classes.downloadButton} variant="outlined" endIcon={<CloudDownloadIcon></CloudDownloadIcon>}>RESUME</Button>
+                    </a>
                   </Box>
                 </Box>
               </Slide>

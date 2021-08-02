@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
+import Button from '@material-ui/core/Button';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
             position: "fixed", width: "50%", marginTop: "100px"
         },
     },
+    downloadButton: {
+        borderRadius: theme.spacing(1)
+    }
 }));
 
 export default function PrimarySearchAppBar() {
@@ -44,9 +50,23 @@ export default function PrimarySearchAppBar() {
                             <Typography variant="h5">A bit about me</Typography>
                         </Box>
                         <Box display="flex" justifyContent="center" margin={2}>
-                            <a href="https://github.com/nanipunepalle"><Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/github_logo.png' : '/github_logo.png'} ></Avatar></a>
-                            <a href="https://linkedin.com/in/lalith-reddy-605480167"><Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/linkedin_logo2.png' : '/linkedin_logo2.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
-                            <a href="https://twitter.com/iamlalithreddy"><Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/twitter_logo.png' : '/twitter_logo.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}></Avatar></a>
+                            <a href="https://github.com/nanipunepalle">
+                                <Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/github_logo.png' : '/github_logo.png'} >
+                                </Avatar>
+                            </a>
+                            <a href="https://linkedin.com/in/lalith-reddy-605480167">
+                                <Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/linkedin_logo2.png' : '/linkedin_logo2.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}>
+                                </Avatar>
+                            </a>
+                            <a href="https://twitter.com/iamlalithreddy">
+                                <Avatar className={classes.iconAvatar} src={process.env.NODE_ENV === 'production' ? '/my_portfolio/twitter_logo.png' : '/twitter_logo.png'} variant="square" style={{ margin: "0px 5px", backgroundColor: "#ffffff" }}>
+                                </Avatar>
+                            </a>
+                        </Box>
+                        <Box display="flex" justifyContent="center" margin={2}>
+                            <a href={process.env.NODE_ENV === 'production' ? `/my_portfolio/RESUME.pdf` : '/RESUME.pdf'} download>
+                                <Button className={classes.downloadButton} variant="outlined" endIcon={<CloudDownloadIcon></CloudDownloadIcon>}>RESUME</Button>
+                            </a>
                         </Box>
                     </Box>
                 </Slide>
