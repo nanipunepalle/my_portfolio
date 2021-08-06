@@ -93,21 +93,21 @@ export default function PrimarySearchAppBar() {
                     </IconButton>
                 </MenuItem>
             </a>
-            <a href="#techdiv">
+            <a href={process.env.NODE_ENV === 'production' ? '/my_portfolio/#techdiv' : "/#techdiv"}>
                 <MenuItem>
                     <IconButton aria-label="skills" color="inherit">
                         <Typography>Skills</Typography>
                     </IconButton>
                 </MenuItem>
             </a>
-            <a href="#projectsdiv">
+            <a href={process.env.NODE_ENV === 'production' ? '/my_portfolio/#projectsdiv' : "/#projectsdiv"}>
                 <MenuItem>
                     <IconButton aria-label="projects" color="inherit">
                         <Typography>Projects</Typography>
                     </IconButton>
                 </MenuItem>
             </a>
-            <a href="#educationdiv">
+            <a href={process.env.NODE_ENV === 'production' ? "/my_portfolio/#educationdiv" : "/#educationdiv"}>
                 <MenuItem>
                     <IconButton aria-label="education" color="inherit">
                         <Typography>Education</Typography>
@@ -121,7 +121,7 @@ export default function PrimarySearchAppBar() {
                     </IconButton>
                 </MenuItem>
             </a>
-            <a href="#contactdiv">
+            <a href={process.env.NODE_ENV === 'production' ? "/my_portfolio/#contactdiv" : "/#contactdiv"}>
                 <MenuItem>
                     <IconButton aria-label="contact" color="inherit">
                         <Typography>Contact</Typography>
@@ -149,17 +149,17 @@ export default function PrimarySearchAppBar() {
                                 <Typography>Home</Typography>
                             </IconButton>
                         </a>
-                        <a href="#techdiv">
+                        <a href={process.env.NODE_ENV === 'production' ? '/my_portfolio/#techdiv' : "/#techdiv"}>
                             <IconButton aria-label="skills" color="inherit">
                                 <Typography>Skills</Typography>
                             </IconButton>
                         </a>
-                        <a href="#projectsdiv">
+                        <a href={process.env.NODE_ENV === 'production' ? '/my_portfolio/#projectsdiv' : "/#projectsdiv"}>
                             <IconButton aria-label="projects" color="inherit">
                                 <Typography>Projects</Typography>
                             </IconButton>
                         </a>
-                        <a href="#educationdiv">
+                        <a href={process.env.NODE_ENV === 'production' ? "/my_portfolio/#educationdiv" : "/#educationdiv"}>
                             <IconButton aria-label="projects" color="inherit">
                                 <Typography>Education</Typography>
                             </IconButton>
@@ -169,7 +169,7 @@ export default function PrimarySearchAppBar() {
                                 <Typography>Gallery</Typography>
                             </IconButton>
                         </a>
-                        <a href="#contactdiv">
+                        <a href={process.env.NODE_ENV === 'production' ? "/my_portfolio/#contactdiv" : "/#contactdiv"}>
                             <IconButton aria-label="contact" color="inherit">
                                 <Typography>Contact</Typography>
                             </IconButton>
