@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Avatar, Chip, Grid, Paper } from '@material-ui/core';
@@ -14,8 +15,15 @@ import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { projects, skills } from '../Components/data'
+import { projects, skills } from '../Components/data';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,10 +62,10 @@ const useStyles = makeStyles((theme) => ({
 
   },
   projectsPaper: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(4),
     borderRadius: theme.spacing(4),
-    boxShadow: "0px 1px 2px 1px white",
+    boxShadow: "0px 0px 2px 1px white",
     '&:hover': {
       background: "rgb(256, 256, 256,0.3)",
     },
@@ -71,8 +79,14 @@ const useStyles = makeStyles((theme) => ({
   educationPaper: {
     width: "100%",
     padding: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.main,
-    margin: theme.spacing(1)
+    backgroundColor: theme.palette.primary.main,
+    margin: theme.spacing(1),
+    // elevation
+  },
+  contactform: {
+    width: "100%",
+    // padding: theme.spacing(2),
+    margin: theme.spacing(1),
   },
   iconAvatar: {
     height: "25px",
@@ -80,12 +94,29 @@ const useStyles = makeStyles((theme) => ({
   },
   downloadButton: {
     borderRadius: theme.spacing(1)
+  },
+  ortext: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 }));
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [Info, setInfo] = React.useState("");
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+    message: 'success',
+    type: 'error',
+    autoHide: 3000
+  });
+  const [loading, setLoading] = React.useState(false);
+  const { vertical, horizontal, message, open, type } = state;
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -93,11 +124,47 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(null);
   };
 
+  const handleClose = async (event, reason) => {
+
+    setState({ ...state, open: false });
+  };
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleFormSubmitButton = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    var data = new FormData();
+    const payload = {
+      name: name,
+      email: email,
+      info: Info
+    }
 
+    data = JSON.stringify(payload);
+    fetch("https://mftracker.eastus.cloudapp.azure.com/api4/send_contact_email", {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      method: "POST",
+      body: data
+    }).then(response => {
+      // console.log(response)
+      setLoading(false);
+      if (response.status == 200) {
+        setState({ ...state, open: true, type: "success", message: "Your message sent successfully" });
+      }
+      else {
+        setState({ ...state, open: true, type: "error", message: "something went wrong" });
+      }
+      setEmail("");
+      setName("");
+      setInfo("");
+    })
+  }
 
   const mobileMenuId = 'menu-mobile';
   const renderMobileMenu = (
@@ -216,7 +283,11 @@ export default function PrimarySearchAppBar() {
       {renderMobileMenu}
       <div>
         <Grid container component="main">
-
+          <Snackbar anchorOrigin={{ vertical, horizontal }} open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity={type} sx={{ width: '100%' }}>
+              {message}
+            </Alert>
+          </Snackbar>
           <Grid item xs={12} md={5} >
             <Box className={classes.leftBox}>
               <Slide direction="right" in={true} timeout={1000} mountOnEnter unmountOnExit>
@@ -257,7 +328,7 @@ export default function PrimarySearchAppBar() {
                   <Grid item xs={12} md={12}>
                     {
                       skills.map((skill, index) => {
-                        return <Chip label={skill} style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
+                        return <Chip key={skill} label={skill} style={{ marginRight: "2px", marginTop: "8px" }}></Chip>
                       })
                     }
                   </Grid>
@@ -270,12 +341,12 @@ export default function PrimarySearchAppBar() {
                     projects.map((val, index) => {
                       return <Grid item xs={12} md={6}>
                         <a href={val.url} target="_blank">
-                          <Paper elevation={10} className={classes.projectsPaper}>
+                          <Paper elevation={1} className={classes.projectsPaper}>
                             <Typography variant="h5" >{val.name}</Typography>
                             <Typography variant="body1" color="textSecondary" style={{ margin: "5px 0px" }}>{val.desc}</Typography>
                             {
                               val.languages.map((lang, value) => {
-                                return <Chip label={lang} style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
+                                return <Chip key={lang} label={lang} style={{ marginRight: "2px", marginTop: "2px" }}></Chip>
                               })
                             }
                           </Paper>
@@ -306,6 +377,54 @@ export default function PrimarySearchAppBar() {
                   <Typography>+91 9014040448</Typography>
                   <Typography>K Block, Men's Hostel, Vellore Institute of Technology, Vellore - 632014</Typography>
                 </Paper>
+                <Typography className={classes.ortext}>OR</Typography>
+                <form onSubmit={handleFormSubmitButton}>
+                  <Grid component="main" container spacing={2} className={classes.contactform}>
+
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        required
+                        id="name-field"
+                        label="Name"
+                        variant="standard"
+                        color="secondary"
+                        fullWidth
+                        value={name}
+                        onChange={(e) => { setName(e.target.value) }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        required
+                        id="email-field"
+                        label="Email"
+                        variant="standard"
+                        color="secondary"
+                        type="email"
+                        fullWidth
+                        value={email}
+                        onChange={(e) => { setEmail(e.target.value) }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                      <TextField
+                        id="info-field"
+                        label="Info"
+                        multiline
+                        rows={4}
+                        color='secondary'
+                        fullWidth
+                        variant='outlined'
+                        value={Info}
+                        onChange={(e) => { setInfo(e.target.value) }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                      <Button disabled={loading}
+                      variant="contained" fullWidth type='submit'>{loading ? <CircularProgress color="primary" size={24} /> :"Submit"}</Button>
+                    </Grid>
+                  </Grid>
+                </form>
               </div>
             </Grid>
           </Slide>
