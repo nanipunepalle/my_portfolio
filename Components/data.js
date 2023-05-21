@@ -52,8 +52,8 @@ const projects = [
   }]
 
   const skills = ["JavaScript", 
-  "Python", "Java", "Swift", "HTML", "CSS", "React.js", "Node.js", 
-  "MongoDB", "SwiftUI", "Flask", "Web Development", "iOS App Development"]
+  "Python", ".NET", "Java", "Swift", "HTML", "CSS", "React.js", "Node.js", "SQL",
+  "MongoDB", "SwiftUI", "Flask", "Web Development", "Cloud Computing", "iOS App Development"]
 
   module.exports={
       projects: projects,
