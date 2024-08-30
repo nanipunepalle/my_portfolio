@@ -11,6 +11,9 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <meta charSet="utf-8" />
+          <title>Redirecting to https://nanipunepalle.github.io/</title>
+          <meta http-equiv="refresh" content="0; URL=https://nanipunepalle.github.io"></meta>
+          <link rel="canonical" href="https://nanipunepalle.github.io/"></link>
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
